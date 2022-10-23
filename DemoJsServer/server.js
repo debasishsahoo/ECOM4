@@ -4,7 +4,6 @@ const server = http.createServer(
     (req, res) => {
         const url = req.url
         console.log('url:', url)
-
         const method = req.method
         console.log('method:', method)
 
@@ -38,19 +37,10 @@ const server = http.createServer(
             res.write(`<h1>Page not Foud</h1>`)
             res.end()
         }
-
-
-
-
-
-
     }
 );
 server.listen(7000, () => { console.log(`Server Connected`) })
 
-
 //Domain => http://localhost
-
 //PORT => 7000
-
 // URL => /home or /user/123 or /prdouct/laptop/hp/omen/intel/i5
