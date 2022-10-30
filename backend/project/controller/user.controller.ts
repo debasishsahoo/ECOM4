@@ -1,7 +1,8 @@
 import express,{Request,Response}  from "express";
+import * as Data from  '../data/persons.data';
 
 export async function allUser(req:Request,res:Response){
-    res.status(200).send('All User')
+    res.status(200).send(Data.persons)
 }
 export async function createUser(req:Request,res:Response){
     res.status(201).send('Create User')
