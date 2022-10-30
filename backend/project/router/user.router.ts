@@ -1,16 +1,12 @@
-import expess, { Request, Response } from 'express';
-import * as UserCtrl from '../controller/user.controller';
-import * as ErrorHandler from '../Error/Error.Handler';
+import express,{Request,Response}  from "express";
+const router=express.Router();
+import * as userCtrl from '../controller/user.controller'
 
-//createing Main Router Entry Point
-const router = expess.Router();
-
-router.get('/', UserCtrl.allUser);
-router.get('/:id', UserCtrl.singleUser);
-router.post('/', UserCtrl.createUser);
-router.put('/:id', UserCtrl.updateAllUser);
-router.patch('/:id', UserCtrl.updateSingleUser);
-router.delete('/:id', UserCtrl.deleteUser);
-router.all('*', ErrorHandler.PageNotFound);
+router.get('/',userCtrl.allUser);
+router.post('/',userCtrl.createUser);
+router.patch('/:id',userCtrl.updateUserByID);
+router.put('/:role',userCtrl.updateUserByRole);
+router.delete('/:id',userCtrl.deleteUser);
+router.get('/:id',userCtrl.singleUser);
 
 export default router;

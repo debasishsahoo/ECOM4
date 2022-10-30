@@ -1,15 +1,23 @@
-import expess, { Request, Response } from 'express';
-import indexRouter from './router/index.router';
-import userRouter from './router/user.router';
+import express,{Request,Response} from 'express'
+import userRoute from './router/user.router'
+import { notFound } from './error/notfound.error';
 
-const PORT: number = 7000;
-const HOST: string = 'localhost';
+const PORT:number=7000;
 
-//create Server with express function
-const server = expess();
-server.use('/index', indexRouter);
-server.use('/user', userRouter);
+const app=express()
+app.use('/user',userRoute);
+app.use(notFound);
 
-server.listen(PORT, HOST, () => {
-  console.info(`server Running on ${HOST}:${PORT} 😁👍`);
-});
+const start= async ()=>{
+    try{
+        app.listen(PORT,()=>{
+            console.info(`Server Listen on http://localhost:${PORT}`)
+        });
+    }
+    catch(e:unknown){
+        console.error(e)
+    }
+
+}
+
+start();

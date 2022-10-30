@@ -1,26 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
+import express,{Request,Response}  from "express";
 
-//GET
-export async function allUser(req: Request, res: Response) {
-  res.status(200).send('This is All User Page');
+export async function allUser(req:Request,res:Response){
+    res.status(200).send('All User')
 }
-//GET
-export async function singleUser(req: Request, res: Response) {
-  res.status(200).send('This is Single User Page');
+export async function createUser(req:Request,res:Response){
+    res.status(201).send('Create User')
 }
-//POST
-export async function createUser(req: Request, res: Response) {
-  res.status(201).send('This is Create User Page');
+export async function updateUserByID(req:Request,res:Response){
+    res.status(202).send('Upadate User By ID')
 }
-//PUT
-export async function updateAllUser(req: Request, res: Response) {
-  res.status(202).send('This is Update All User Page');
+export async function updateUserByRole(req:Request,res:Response){
+    res.status(202).send('Upadate User By Role')
 }
-//PATCH
-export async function updateSingleUser(req: Request, res: Response) {
-  res.status(202).send('This is Update Single User Page');
+export async function singleUser(req:Request,res:Response){
+    res.status(200).send('Single User')
 }
-//DELETE
-export async function deleteUser(req: Request, res: Response) {
-  res.status(200).send('This is Delete User Page');
+export async function deleteUser(req:Request,res:Response){
+    res.status(301).send('Delete User')
 }
