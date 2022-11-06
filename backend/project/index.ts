@@ -24,3 +24,6 @@ const start = async () => {
 }
 
 start();
+
+
+//POST localhost:7000/user/

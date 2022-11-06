@@ -6,8 +6,9 @@ export async function allUser(req: Request, res: Response) {
 }
 export async function createUser(req: Request, res: Response) {
     const newUser = req.body
+    console.log('newUser:', newUser)
 
-    if (newUser.length <= 0) {
+    if (newUser.length == 0) {
         return res.status(400).json({ success: false, msg: 'Please Provide Data' })
     }
     const responseData = [...persons, newUser]
@@ -22,12 +23,13 @@ export async function updateUserByID(req: Request, res: Response) {
         return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
     }
 
-
+    //loop
     const updateUser = persons.map((person) => {
         if (person.id === Number(id)) {
             person.name = updateData.name
             person.age = updateData.age
             person.streem = updateData.streem
+            person.mobile = updateData.mobile
         }
         return person
     })
@@ -73,4 +75,10 @@ export async function deleteUser(req: Request, res: Response) {
     const updateUser = persons.filter((person) => person.id !== Number(id))
     res.status(301).send({ success: true, msg: updateUser })
 
+}
+
+export async function SearchUser(req: Request, res: Response) {
+    const { q } = req.query
+
+    res.status(302).send({ success: true, msg: q })
 }

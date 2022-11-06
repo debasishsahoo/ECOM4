@@ -37,6 +37,13 @@ const persons = [
         name: 'Shaqlin Mondal',
         age: 19,
         streem: 'EE'
+    },
+    {
+        id: 7,
+        name: 'Arnab Ghosh',
+        age: 20,
+        streem: 'CSE',
+        mobile: ''
     }
 ]
 
