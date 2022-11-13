@@ -76,9 +76,36 @@ export async function deleteUser(req: Request, res: Response) {
     res.status(301).send({ success: true, msg: updateUser })
 
 }
-
 export async function SearchUser(req: Request, res: Response) {
-    const { q } = req.query
+    const { name, limit, streem } = req.query
+    let SortedUser = [...persons];
 
-    res.status(302).send({ success: true, msg: q })
+    if (name) {
+        SortedUser = SortedUser.filter(user => {
+            return user.name.startsWith(String(name))
+        })
+    }
+
+    if (streem) {
+        SortedUser = SortedUser.filter(user => {
+            return user.streem.startsWith(String(streem))
+        })
+    }
+
+    const TotalResult: number = SortedUser.length;
+
+    if (limit) {
+        SortedUser = SortedUser.slice(0, Number(limit))
+    }
+
+
+    if (SortedUser.length === 0) {
+        return res.status(404).json({ success: false, msg: `No User found with Name: ${name}` })
+    }
+
+    const DisplayMsg: string = `1-${limit} over ${TotalResult} result found for "${name}"`
+
+    res.status(302).send({
+        success: true, msg: DisplayMsg, data: SortedUser
+    })
 }

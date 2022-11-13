@@ -44,7 +44,50 @@ const persons = [
         age: 20,
         streem: 'CSE',
         mobile: ''
-    }
+    },
+    {
+        id: 8,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+    {
+        id: 9,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+    {
+        id: 10,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+    {
+        id: 11,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+    {
+        id: 12,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+    {
+        id: 13,
+        name: 'Amit Kumar Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
+
+    {
+        id: 14,
+        name: 'Kumar Amit Sarkar',
+        age: 19,
+        streem: 'CE'
+    },
 ]
 
 export default persons
