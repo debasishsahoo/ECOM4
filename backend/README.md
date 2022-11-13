@@ -11,6 +11,7 @@ npx tsc --init
 # install Express Server and Create express App
 
 npm i express
+npm i mongoose
 
 # install All the Typescript Package for devDependencies
 

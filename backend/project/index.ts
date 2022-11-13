@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express'
+import Connect from './db/connect';
+import config from './config/default'
 import userRoute from './router/user.router'
 import { notFound } from './error/notfound.error';
 
-const PORT: number = 7000;
+const PORT: number = config.port;
+const DBURL: string = config.dburl;
 
 
 const app = express()
@@ -13,6 +16,7 @@ app.use(notFound);
 
 const start = async () => {
     try {
+        await Connect(DBURL);
         app.listen(PORT, () => {
             console.info(`Server Listen on http://localhost:${PORT}`)
         });
