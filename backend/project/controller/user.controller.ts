@@ -1,111 +1,120 @@
 import express, { Request, Response } from "express";
-import persons from '../data/persons.data';
+import { Insert, Update, View, ViewAll, Delete } from '../services/user.service'
+
+
 
 export async function allUser(req: Request, res: Response) {
-    res.status(200).json(persons)
+    const AllUser = await ViewAll();
+    if (AllUser.length === 0) {
+        return res.status(404).json({ success: false, msg: 'No Data Found' });
+    }
+    return res.status(200).json({ success: true, msg: `${AllUser.length} record found`, data: AllUser })
 }
+
+
 export async function createUser(req: Request, res: Response) {
-    const newUser = req.body
-    console.log('newUser:', newUser)
-
-    if (newUser.length == 0) {
-        return res.status(400).json({ success: false, msg: 'Please Provide Data' })
+    const inputRequest = req.body
+    try {
+        const user = await Insert(inputRequest);
+        return res.status(201).json({ success: true, msg: 'Data Inserted', data: user })
     }
-    const responseData = [...persons, newUser]
-    res.status(201).json({ success: true, msg: responseData })
+    catch (error: unknown) {
+        return res.status(400).json({ success: false, msg: error })
+    }
 }
+
+
 export async function updateUserByID(req: Request, res: Response) {
-    const { id } = req.params
-    const updateData = req.body
+    const _id = req.params.id
+    const updateRequest = req.body
 
-    const oldUser = persons.find((person) => person.id === Number(id));
-    if (!oldUser) {
-        return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
+    const user = await View({ _id })
+
+    if (!user) {
+        return res.status(401).json({ success: false, msg: `No User found with id ${_id}` })
     }
 
-    //loop
-    const updateUser = persons.map((person) => {
-        if (person.id === Number(id)) {
-            person.name = updateData.name
-            person.age = updateData.age
-            person.streem = updateData.streem
-            person.mobile = updateData.mobile
-        }
-        return person
-    })
+    const updateUser = await Update({ _id }, updateRequest, { new: true })
 
-
-    res.status(202).send({ success: true, msg: updateUser })
+    res.status(202).json({ success: true, msg: `User found with id:${_id}`, data: updateUser })
 }
-export async function updateUserByStreem(req: Request, res: Response) {
-    const { role } = req.params
-    const updateData = req.body
 
-    const oldUser = persons.find((person) => person.streem === role);
-    if (!oldUser) {
-        return res.status(400).json({ success: false, msg: `No User found with streem ${role}` })
-    }
+// //update old data
+// export async function updateUserByStreem(req: Request, res: Response) {
+//     const { role } = req.params
+//     const updateData = req.body
 
-
-    const updateUser = persons.map((person) => {
-        if (person.streem === role) {
-            person.age = updateData.age
-        }
-        return person
-    })
+//     const oldUser = persons.find((person) => person.streem === role);
+//     if (!oldUser) {
+//         return res.status(400).json({ success: false, msg: `No User found with streem ${role}` })
+//     }
 
 
-    res.status(202).send({ success: true, msg: updateUser })
-}
-export async function singleUser(req: Request, res: Response) {
-    const { id } = req.params
-
-    const oldUser = persons.find((person) => person.id === Number(id));
-    if (!oldUser) {
-        return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
-    }
-    res.status(200).send({ success: true, msg: oldUser })
-}
-export async function deleteUser(req: Request, res: Response) {
-    const { id } = req.params
-    const oldUser = persons.find((person) => person.id === Number(id));
-    if (!oldUser) {
-        return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
-    }
-    const updateUser = persons.filter((person) => person.id !== Number(id))
-    res.status(301).send({ success: true, msg: updateUser })
-
-}
-export async function SearchUser(req: Request, res: Response) {
-    const { name, limit, streem } = req.query
-    let SortedUser = [...persons];
-
-    if (name) {
-        SortedUser = SortedUser.filter(user => {
-            return user.name.startsWith(String(name))
-        })
-    }
-
-    if (streem) {
-        SortedUser = SortedUser.filter(user => {
-            return user.streem.startsWith(String(streem))
-        })
-    }
-
-    const TotalResult: number = SortedUser.length;
-
-    if (limit) {
-        SortedUser = SortedUser.slice(0, Number(limit))
-    }
+//     const updateUser = persons.map((person) => {
+//         if (person.streem === role) {
+//             person.age = updateData.age
+//         }
+//         return person
+//     })
 
 
-    if (SortedUser.length === 0) {
-        return res.status(404).json({ success: false, msg: `No User found with Name: ${name}` })
-    }
+//     res.status(202).send({ success: true, msg: updateUser })
+// }
 
-    const DisplayMsg: string = `1-${limit} over ${TotalResult} result found for "${name}"`
+// //view Single data
+// export async function singleUser(req: Request, res: Response) {
+//     const { id } = req.params
 
-    res.status(302).send({
-        success: true, msg: DisplayMsg, data: SortedUser
-    })
-}
+//     const oldUser = persons.find((person) => person.id === Number(id));
+//     if (!oldUser) {
+//         return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
+//     }
+//     res.status(200).send({ success: true, msg: oldUser })
+// }
+
+// //delete data
+// export async function deleteUser(req: Request, res: Response) {
+//     const { id } = req.params
+//     const oldUser = persons.find((person) => person.id === Number(id));
+//     if (!oldUser) {
+//         return res.status(400).json({ success: false, msg: `No User found with id ${id}` })
+//     }
+//     const updateUser = persons.filter((person) => person.id !== Number(id))
+//     res.status(301).send({ success: true, msg: updateUser })
+
+// }
+
+// //search data
+// export async function SearchUser(req: Request, res: Response) {
+//     const { name, limit, streem } = req.query
+//     let SortedUser = [...persons];
+
+//     if (name) {
+//         SortedUser = SortedUser.filter(user => {
+//             return user.name.startsWith(String(name))
+//         })
+//     }
+
+//     if (streem) {
+//         SortedUser = SortedUser.filter(user => {
+//             return user.streem.startsWith(String(streem))
+//         })
+//     }
+
+//     const TotalResult: number = SortedUser.length;
+
+//     if (limit) {
+//         SortedUser = SortedUser.slice(0, Number(limit))
+//     }
+
+
+//     if (SortedUser.length === 0) {
+//         return res.status(404).json({ success: false, msg: `No User found with Name: ${name}` })
+//     }
+
+//     const DisplayMsg: string = `1-${limit} over ${TotalResult} result found for "${name}"`
+
+//     res.status(302).send({
+//         success: true, msg: DisplayMsg, data: SortedUser
+//     })
+// }

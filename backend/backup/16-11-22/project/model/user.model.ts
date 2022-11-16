@@ -30,4 +30,3 @@ const UserSchema = new mongoose.Schema({
 
 
 const User = mongoose.model<UserDocument>('UserTable', UserSchema)
-export default User
