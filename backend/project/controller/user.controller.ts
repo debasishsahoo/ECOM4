@@ -39,28 +39,6 @@ export async function updateUserByID(req: Request, res: Response) {
     res.status(202).json({ success: true, msg: `User found with id:${_id}`, data: updateUser })
 }
 
-// //update old data
-// export async function updateUserByStreem(req: Request, res: Response) {
-//     const { role } = req.params
-//     const updateData = req.body
-
-//     const oldUser = persons.find((person) => person.streem === role);
-//     if (!oldUser) {
-//         return res.status(400).json({ success: false, msg: `No User found with streem ${role}` })
-//     }
-
-
-//     const updateUser = persons.map((person) => {
-//         if (person.streem === role) {
-//             person.age = updateData.age
-//         }
-//         return person
-//     })
-
-
-//     res.status(202).send({ success: true, msg: updateUser })
-// }
-
 // //view Single data
 // export async function singleUser(req: Request, res: Response) {
 //     const { id } = req.params

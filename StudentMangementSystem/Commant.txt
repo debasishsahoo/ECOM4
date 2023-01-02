@@ -1,0 +1,5 @@
+React is Frontend Libeary which is made by Faecbook
+to magnage wall appliction
+
+to create React Appliction
+npx create-react-app <App-Name>
