@@ -28,8 +28,6 @@ const isNonZero = (value) => {
 
 function ValidatedType(...validators) {
     return function (props, propName, componentName) {
-
-
         const value = props[propName];
 
         console.log('props:', props)
@@ -40,7 +38,7 @@ function ValidatedType(...validators) {
         const valid = validators.every((validator) => {
 
             if (typeof validator === 'function') {
-                
+
                 const result = validator(value);
 
                 return typeof result === 'boolean' && result;
@@ -50,7 +48,7 @@ function ValidatedType(...validators) {
 
         if (!valid) {
             return new Error(
-                `Invalid prop ${propName} passes to ${componentName}. Validation Failed`
+                `Invalid prop ${propName} passes to ${componentName}. Validation Failed :)`
             );
         }
     }

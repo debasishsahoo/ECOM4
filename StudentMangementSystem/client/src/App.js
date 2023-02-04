@@ -1,14 +1,15 @@
-import Demo1 from './Components/Demo1'
-import SingleProp from './Components/SingleProp';
-import MultipleProp from './Components/MultipleProp';
-import ValueProps from './Components/Value.prop'
-import PropsPass from './Components/PropsPass'
-import OptionalProps from './Components/OptionalProps'
-import PropsSpread from './Components/PropsSpread'
-import Parent from './Components/Parent'
+import React from 'react';
+// import Demo1 from './Components/Demo1'
+// import SingleProp from './Components/SingleProp';
+// import MultipleProp from './Components/MultipleProp';
+//import ValueProps from './Components/Value.prop'
+//import PropsPass from './Components/PropsPass'
+//import OptionalProps from './Components/OptionalProps'
+//import PropsSpread from './Components/PropsSpread'
+//import Parent from './Components/Parent'
 //import Product from './ProductCard/Product';
-import JsxComponent from './Components/JsxComponent'
-import NotJsx from './Components/NotJsx';
+//import JsxComponent from './Components/JsxComponent'
+//import NotJsx from './Components/NotJsx';
 //import Population from './Validation/Population';
 //import Validation from './Validation/Validation'
 import TotalValidation from './Validation/TotalValidation'
@@ -26,7 +27,10 @@ function App() {
       <MultipleProp x="Amit" y="Suman" z="Rohit" />
       <MultipleProp x="Amit" /> */}
 
-      <ValueProps
+
+
+
+      {/* <ValueProps
         strData="This is String Value"
         templateData={`The age is ${age} and ${income}`}
         numData={23}
@@ -34,7 +38,10 @@ function App() {
         objData={{ name: 'Dev' }}
         jsxData={45 % 5}
         anyData={`${age}*${income} 👍`}
-      />
+      /> */}
+
+
+
 
       {/* <PropsPass students={['Amit', 'Suman', 'Retwik', 'rohit', 'saq', 'Sup']} /> */}
 
@@ -60,7 +67,15 @@ function App() {
       {/* <Population /> */}
 
       {/* <Validation /> */}
-      <TotalValidation />
+      {/* <TotalValidation /> */}
+
+      <TotalValidation
+        nodeProp={<h1>Debasish</h1>}
+        elementProp={React.createElement('h1', { className: 'btn' }, 'debasish')}
+        enumProp={3}
+      />
+
+
     </>
 
   );
