@@ -1,16 +1,11 @@
 import React from 'react';
-import Card from './components/Card'
-import Msg from './components/Msg'
-import Clock from './components/Clock'
+import EventComponent from './components/EventComponent';
 
 
 function App() {
   return (
     <>
-      {/* <Card /> */}
-      {/* <Msg /> */}
-
-      <Clock />
+      <EventComponent />
     </>
   );
 }
