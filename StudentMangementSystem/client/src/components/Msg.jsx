@@ -7,7 +7,11 @@ class Msg extends React.Component {
         show: true
     }
 
+
+
+
     render() {
+        console.log(this.state.show)
         return (
             <>
                 {
@@ -15,27 +19,16 @@ class Msg extends React.Component {
                 }
                 <div>
                     <button className="button show" onClick={() => {
-                        this.setState({
-                            show: true
-                        })
+                        this.setState({ show: true })
                     }}>Show</button>
 
-
-
-                    
                     <button className="button hide" onClick={() => {
-                        this.setState({
-                            show: false
-                        })
+                        this.setState({ show: false })
                     }}>Hide</button>
 
-
-
-
-
-
-
-                    <button className="button togg">Toggle</button>
+                    <button className="button togg" onClick={
+                        () => { this.setState({ show: !this.state.show }) }
+                    }>Toggle</button>
                 </div>
             </>
         );
