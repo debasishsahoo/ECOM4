@@ -1,41 +1,58 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Card.css'
-import Image from './ChildComponent/Image'
-import Info from './ChildComponent/Info'
-import Headline from './ChildComponent/Headline'
-import Social from './ChildComponent/Social'
 
-export default function Card() {
-    const divStyle = {
-        margin: '24px 0'
+
+class Card extends Component {
+    constructor(props) {
+        console.log('Invoked Constructur');
+        super(props);
+
+        //! Provide Default Data 
+        this.state = {
+            img: '/asset/OIP.jpeg',
+            name: 'Name',
+            job: 'job'
+        }
+
     }
 
-    const Data = {
-        title: 'Devloper Profile Card',
-        img: 'https://www.w3schools.com/w3images/team2.jpg',
-        name: 'Debasish Sahoo',
-        job: 'CEO & CTO & Founder',
-        clg: 'GMIT'
+    Male = () => {
+        //! Chgange the state Value Baseed on User Click
+        this.setState({
+            img: 'https://www.w3schools.com/howto/img_avatar.png',
+            name: 'Mr.Amit Kr Sarkar',
+            job: 'EE'
+        })
     }
 
-    return (
-        <div>
-            <Headline title={Data.title} />
+    FeMale = () => {
+        //! Chgange the state Value Baseed on User Click
+        this.setState({
+            img: 'https://www.w3schools.com/howto/img_avatar2.png',
+            name: 'Ms.Amit Kr Sarkar',
+            job: 'BSc'
+        })
+    }
 
-            <div className="card">
+    render() {
+        return (
+            <>
+                <h2>Card</h2>
 
-                <Image img={Data.img} />
-
-                <Info name={Data.name} job={Data.job} clg={Data.clg} />
-
-                <div style={divStyle}>
-
-                    <Social />
+                <div className="card">
+                    <img src={this.state.img} alt="Avatar" style={{ width: '50%' }} />
+                    <div className="container">
+                        <h4><b>{this.state.name}</b></h4>
+                        <p>{this.state.job}</p>
+                    </div>
+                    <div className="container">
+                        <button className='button' onClick={this.Male}>Male</button>
+                        <button className='button' onClick={this.FeMale}>FeMale</button>
+                    </div>
                 </div>
+            </>
+        );
+    }
 
-                <p><button>Contact</button></p>
-            </div>
-
-        </div >
-    )
 }
+export default Card
